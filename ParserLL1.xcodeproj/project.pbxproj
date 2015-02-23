@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		AC24E7F11A96941300002250 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24E7F01A96941300002250 /* main.swift */; };
+		AC24E7F81A9731EE00002250 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24E7F71A9731EE00002250 /* Tokenizer.swift */; };
+		AC24E7FA1A97323200002250 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24E7F91A97323200002250 /* Token.swift */; };
+		AC74A8101A9A1DD0003CC5F1 /* ExpressionNodeVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74A80F1A9A1DD0003CC5F1 /* ExpressionNodeVisitor.swift */; };
+		AC74A8121A9A78FE003CC5F1 /* SetVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74A8111A9A78FE003CC5F1 /* SetVariable.swift */; };
+		AC9106B41A9764D1001C6B32 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106B31A9764D1001C6B32 /* Parser.swift */; };
+		AC9106B61A977530001C6B32 /* ExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106B51A977530001C6B32 /* ExpressionNode.swift */; };
+		AC9106B81A978839001C6B32 /* ExpressionNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106B71A978839001C6B32 /* ExpressionNodeProtocol.swift */; };
+		AC9106BA1A9788C7001C6B32 /* ConstantExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106B91A9788C7001C6B32 /* ConstantExpressionNode.swift */; };
+		AC9106BC1A978E85001C6B32 /* VariableExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106BB1A978E85001C6B32 /* VariableExpressionNode.swift */; };
+		AC9106C01A9796EF001C6B32 /* SequenceExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106BF1A9796EF001C6B32 /* SequenceExpressionNode.swift */; };
+		AC9106C21A97C11F001C6B32 /* AdditionExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106C11A97C11F001C6B32 /* AdditionExpressionNode.swift */; };
+		AC9106C41A97C2E5001C6B32 /* MultiplicationExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106C31A97C2E5001C6B32 /* MultiplicationExpressionNode.swift */; };
+		AC9106C61A97C39D001C6B32 /* ExponentiationExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106C51A97C39D001C6B32 /* ExponentiationExpressionNode.swift */; };
+		AC9106C81A97D144001C6B32 /* FunctionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106C71A97D144001C6B32 /* FunctionNode.swift */; };
+		AC9106CA1A97D240001C6B32 /* FunctionExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9106C91A97D240001C6B32 /* FunctionExpressionNode.swift */; };
+		ACBB62C31A9BBF05008B9655 /* ErrorExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBB62C21A9BBF05008B9655 /* ErrorExpressionNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +41,22 @@
 /* Begin PBXFileReference section */
 		AC24E7ED1A96941300002250 /* ParserLL1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ParserLL1; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC24E7F01A96941300002250 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AC24E7F71A9731EE00002250 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		AC24E7F91A97323200002250 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		AC74A80F1A9A1DD0003CC5F1 /* ExpressionNodeVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionNodeVisitor.swift; sourceTree = "<group>"; };
+		AC74A8111A9A78FE003CC5F1 /* SetVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetVariable.swift; sourceTree = "<group>"; };
+		AC9106B31A9764D1001C6B32 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		AC9106B51A977530001C6B32 /* ExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106B71A978839001C6B32 /* ExpressionNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionNodeProtocol.swift; sourceTree = "<group>"; };
+		AC9106B91A9788C7001C6B32 /* ConstantExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106BB1A978E85001C6B32 /* VariableExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106BF1A9796EF001C6B32 /* SequenceExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106C11A97C11F001C6B32 /* AdditionExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106C31A97C2E5001C6B32 /* MultiplicationExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106C51A97C39D001C6B32 /* ExponentiationExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExponentiationExpressionNode.swift; sourceTree = "<group>"; };
+		AC9106C71A97D144001C6B32 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
+		AC9106C91A97D240001C6B32 /* FunctionExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionExpressionNode.swift; sourceTree = "<group>"; };
+		ACBB62C21A9BBF05008B9655 /* ErrorExpressionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExpressionNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +90,22 @@
 			isa = PBXGroup;
 			children = (
 				AC24E7F01A96941300002250 /* main.swift */,
+				AC24E7F71A9731EE00002250 /* Tokenizer.swift */,
+				AC24E7F91A97323200002250 /* Token.swift */,
+				AC9106B31A9764D1001C6B32 /* Parser.swift */,
+				AC9106B51A977530001C6B32 /* ExpressionNode.swift */,
+				AC9106B71A978839001C6B32 /* ExpressionNodeProtocol.swift */,
+				AC9106B91A9788C7001C6B32 /* ConstantExpressionNode.swift */,
+				AC9106BB1A978E85001C6B32 /* VariableExpressionNode.swift */,
+				AC9106BF1A9796EF001C6B32 /* SequenceExpressionNode.swift */,
+				AC9106C11A97C11F001C6B32 /* AdditionExpressionNode.swift */,
+				AC9106C31A97C2E5001C6B32 /* MultiplicationExpressionNode.swift */,
+				AC9106C51A97C39D001C6B32 /* ExponentiationExpressionNode.swift */,
+				AC9106C71A97D144001C6B32 /* FunctionNode.swift */,
+				AC9106C91A97D240001C6B32 /* FunctionExpressionNode.swift */,
+				AC74A80F1A9A1DD0003CC5F1 /* ExpressionNodeVisitor.swift */,
+				AC74A8111A9A78FE003CC5F1 /* SetVariable.swift */,
+				ACBB62C21A9BBF05008B9655 /* ErrorExpressionNode.swift */,
 			);
 			path = ParserLL1;
 			sourceTree = "<group>";
@@ -118,7 +166,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9106C01A9796EF001C6B32 /* SequenceExpressionNode.swift in Sources */,
+				AC9106B41A9764D1001C6B32 /* Parser.swift in Sources */,
+				AC9106C81A97D144001C6B32 /* FunctionNode.swift in Sources */,
+				AC9106B81A978839001C6B32 /* ExpressionNodeProtocol.swift in Sources */,
+				AC9106BA1A9788C7001C6B32 /* ConstantExpressionNode.swift in Sources */,
+				AC9106CA1A97D240001C6B32 /* FunctionExpressionNode.swift in Sources */,
+				AC9106C41A97C2E5001C6B32 /* MultiplicationExpressionNode.swift in Sources */,
+				AC9106BC1A978E85001C6B32 /* VariableExpressionNode.swift in Sources */,
+				AC9106C21A97C11F001C6B32 /* AdditionExpressionNode.swift in Sources */,
+				AC24E7FA1A97323200002250 /* Token.swift in Sources */,
+				AC9106C61A97C39D001C6B32 /* ExponentiationExpressionNode.swift in Sources */,
 				AC24E7F11A96941300002250 /* main.swift in Sources */,
+				AC9106B61A977530001C6B32 /* ExpressionNode.swift in Sources */,
+				AC24E7F81A9731EE00002250 /* Tokenizer.swift in Sources */,
+				AC74A8121A9A78FE003CC5F1 /* SetVariable.swift in Sources */,
+				AC74A8101A9A1DD0003CC5F1 /* ExpressionNodeVisitor.swift in Sources */,
+				ACBB62C31A9BBF05008B9655 /* ErrorExpressionNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +297,7 @@
 				AC24E7F61A96941300002250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
