@@ -10,11 +10,9 @@ import Foundation
 
 var par:Parser = Parser()
 
-let expr = par.parse("    ")
-if expr.exprNode != nil {
-    let π = M_PI
-    expr.exprNode!.accept(SetVariable(name: "PI", value: π))
-    println("The value of the expression is  \(expr.exprNode!.getValue())")
+let expr = par.parse("  11 + (exp(2.010635 + sin(PI/2) * 3) + 50) / 2 ")
+if expr.expression != nil {
+    println("The value of the expression is  \(expr.expression!.getValue())")
 } else {
     println(expr.message)
 }
