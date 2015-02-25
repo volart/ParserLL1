@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SetVariable: ExpressionNodeVisitor {
+class Variable: ExpressionVisitor {
     private var name:String
     private var value:Double
     
@@ -17,29 +17,29 @@ class SetVariable: ExpressionNodeVisitor {
         self.value = value
     }
     
-    func visit(node:VariableExpressionNode){
+    func visit(node:VariableExpression){
         if node.getName() == name {
             node.setValue(value)
         }
     }
     
-    func visit(ConstantExpressionNode){
+    func visit(ConstantExpression){
         
     }
     
-    func visit(AdditionExpressionNode){
+    func visit(AdditionExpression){
         
     }
     
-    func visit(MultiplicationExpressionNode){
+    func visit(MultiplicationExpression){
         
     }
     
-    func visit(ExponentiationExpressionNode){
+    func visit(ExponentiationExpression){
         
     }
     
-    func visit(FunctionExpressionNode){
+    func visit(FunctionExpression){
         
     }
 }

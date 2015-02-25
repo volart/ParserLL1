@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Here is realized LL(1) grammar parser and calculated math expression.
 class Parser {
     var tokens: Array<Token>
     var lookahead: Token
@@ -17,10 +18,10 @@ class Parser {
         lookahead = Token()
     }
     
-    func parse(str:String) -> (expression: ExpressionNodeProtocol?, message: String?) {
+    private func parse(str:String?) -> (expression: ExpressionProtocol?, message: String?) {
         
         var tokenizer:Tokenizer = Tokenizer.getExpressionTokenizer()
-        tokenizer.tokenize(str)
+        tokenizer.tokenize(str!)
         var tokens:Array<Token> = tokenizer.getTokens()
         if tokens.capacity == 0 {
             let mes:String = "Please, you have to write something in arguments. Something like: 29 + 13"
@@ -29,75 +30,90 @@ class Parser {
         return parse(tokens)
     }
     
-    private func parse(tokens: Array<Token>) -> (expression: ExpressionNodeProtocol?, message: String?) {
+    func parseMain(str:String?) -> (result: Double?, message: String?) {
+        let p = parse(str)
+        let e = p.expression
+        if e == nil {
+            return (nil, p.message!)
+        }
+        if let v = e?.getValue() {
+            return (v, nil)
+        } else {
+            let mes =  "Unknown constant"
+            return (nil, mes)
+        }
+    }
+    
+    private func parse(tokens: Array<Token>) -> (expression: ExpressionProtocol?, message: String?) {
+        var mes:String?
         self.tokens = tokens
         lookahead = self.tokens.first!
         
         var expr = expression()
-        
         if expr.expression == nil {
             return expr
         }
         
         if lookahead.token != Token.epsilon {
-            let mes:String =  "Unexpected symbol found"
+            mes =  "Unexpected symbol found"
             return (nil, mes)
         }
         
         setVariable(expr.expression!)
-            
         return (expr.expression, nil)
     }
     
-    func nextToken(){
+    private func nextToken(){
         tokens.removeAtIndex(0)
         
         if tokens.isEmpty {
+            // epsilon token means end
             lookahead = Token(token: Token.epsilon, sequence: "", pos: -1)
         } else {
             lookahead = tokens.first!
         }
     }
     
-    func expression() -> (expression: ExpressionNodeProtocol?, message: String?) {
+    private func expression() -> (expression: ExpressionProtocol?, message: String?) {
         var exp = signedTerm()
+        
         if exp.expression == nil {
             return exp
         }
         return sumOp(exp.expression, message: nil)
     }
     
-    func sumOp(expression: ExpressionNodeProtocol?, message: String?) -> (expression: ExpressionNodeProtocol?, message: String?) {
+    private func sumOp(expression: ExpressionProtocol?, message: String?) -> (expression: ExpressionProtocol?, message: String?) {
+        
         if expression == nil {
             return (expression, message)
         }
-        // sum_op -> PLUSMINUS term sum_op
+        
         if lookahead.token == Token.plusminus {
-            var sum:AdditionExpressionNode
-            if expression!.getType() == ExpressionNode.addition.rawValue {
-                sum = expression as AdditionExpressionNode
+            var sum:AdditionExpression
+            if expression!.getType() == Expression.addition.rawValue {
+                sum = expression! as AdditionExpression
             } else {
-                sum = AdditionExpressionNode(exp: expression!, positive: true)
+                sum = AdditionExpression(exp: expression!, positive: true)
             }
-            var isPositive:Bool = lookahead.sequence == "+"
+            let isPositive:Bool = lookahead.sequence == "+"
             nextToken()
             
-            var t =  term()
+            let t =  term()
             if t.expression == nil {
                 return t
             }
             sum.add(t.expression!, positive: isPositive)
             return sumOp(sum, message: nil)
         }
-        // sum_op -> EPSILON
+
         return (expression, message)
     }
     
-    func signedTerm() -> (expression: ExpressionNodeProtocol?, message: String?) {
-        // signed_term -> PLUSMINUS term
+    private func signedTerm() -> (expression: ExpressionProtocol?, message: String?) {
+
         if lookahead.token == Token.plusminus {
             let isPositive:Bool = lookahead.sequence == "+"
-            
             nextToken()
             var t = term()
             if t.expression == nil {
@@ -106,16 +122,14 @@ class Parser {
             if isPositive {
                 return (t.expression, nil)
             } else {
-                return (AdditionExpressionNode(exp: t.expression!, positive: isPositive), nil)
+                return (AdditionExpression(exp: t.expression!, positive: isPositive), nil)
             }
         } else {
-            // signed_term -> term
             return term()
         }
     }
     
-    func term() -> (expression: ExpressionNodeProtocol?, message: String?){
-        // term -> factor term_op
+    private func term() -> (expression: ExpressionProtocol?, message: String?){
         var f = factor()
         if f.expression == nil {
             return f
@@ -123,19 +137,18 @@ class Parser {
         return termOp(f.expression!, message: nil)
     }
     
-    func termOp(expression: ExpressionNodeProtocol?, message: String?) -> (expression: ExpressionNodeProtocol?, message: String?){
+    private func termOp(expression: ExpressionProtocol?, message: String?) -> (expression: ExpressionProtocol?, message: String?){
         
         if expression == nil {
             return (expression, message)
         }
         
-        // term_op -> MULTDIV factor term_op
         if lookahead.token == Token.multdiv {
-            var prod:MultiplicationExpressionNode
-            if expression!.getType() == ExpressionNode.multiplication.rawValue {
-                prod = expression as MultiplicationExpressionNode
+            var prod:MultiplicationExpression
+            if expression!.getType() == Expression.multiplication.rawValue {
+                prod = expression as MultiplicationExpression
             } else {
-                prod = MultiplicationExpressionNode(exp: expression!, positive: true)
+                prod = MultiplicationExpression(exp: expression!, positive: true)
             }
             
             let isPositive:Bool = lookahead.sequence == "*"
@@ -148,13 +161,11 @@ class Parser {
             
             return termOp(prod, message: nil)
         } else {
-            // term_op -> EPSILON
             return (expression, message)
         }
     }
     
-    func signedFactor() -> (expression: ExpressionNodeProtocol?, message: String?){
-        // signed_factor -> PLUSMINUS factor
+    private func signedFactor() -> (expression: ExpressionProtocol?, message: String?){
         if lookahead.token == Token.plusminus {
             var isPositive:Bool = lookahead.sequence == "+"
             nextToken()
@@ -165,14 +176,12 @@ class Parser {
             if isPositive {
                 return (t.expression, nil)
             }
-            return (AdditionExpressionNode(exp: t.expression!, positive: isPositive), nil)
+            return (AdditionExpression(exp: t.expression!, positive: isPositive), nil)
         }
-            // signed_factor -> factor
             return factor()
     }
     
-    func factor()-> (expression: ExpressionNodeProtocol?, message: String?) {
-        // factor -> argument factor_op
+    private func factor()-> (expression: ExpressionProtocol?, message: String?) {
         var a = argument()
         if a.expression == nil {
             return a
@@ -180,37 +189,33 @@ class Parser {
         return factorOp(a.expression!, message: a.message)
     }
     
-    func factorOp(expression: ExpressionNodeProtocol?, message: String?) -> (expression: ExpressionNodeProtocol?, message: String?) {
+    private func factorOp(expression: ExpressionProtocol?, message: String?) -> (expression: ExpressionProtocol?, message: String?) {
         
         if lookahead.token == Token.raised {
-            // factor_op -> RAISED expression
             nextToken()
             var exponent = signedFactor()
             if exponent.expression == nil {
                 return exponent
             }
-            return (ExponentiationExpressionNode(base: expression!, exponent: exponent.expression!), nil)
+            return (ExponentiationExpression(base: expression!, exponent: exponent.expression!), nil)
         } else {
-            // factor_op -> EPSILON
             return (expression, message)
         }
     }
     
-    func argument() -> (expression: ExpressionNodeProtocol?, message: String?) {
+    private func argument() -> (expression: ExpressionProtocol?, message: String?) {
         let seq = lookahead.sequence
-        var expr:(expression: ExpressionNodeProtocol?, message: String?)
+        var expr:(expression: ExpressionProtocol?, message: String?)
         switch lookahead.token  {
             case Token.function :
-                // argument -> FUNCTION argument
-                let function:Int = FunctionExpressionNode.stringToFunction(seq)
+                let function:Int = FunctionExpression.stringToFunction(seq)
                 nextToken()
                 expr = argument()
                 if expr.expression == nil {
                     return expr
                 }
-                return (FunctionExpressionNode(function: function, argument: expr.expression!), nil)
+                return (FunctionExpression(function: function, argument: expr.expression!), nil)
             case Token.openBracket :
-                // argument -> OPEN_BRACKET sum CLOSE_BRACKET
                 nextToken()
                 expr = expression()
             
@@ -222,22 +227,21 @@ class Parser {
                 nextToken()
                 return expr
             default :
-                // argument -> value
                 return value()
             }
         
     }
     
-    func value() -> (expression: ExpressionNodeProtocol?, message: String?) {
-        var expr:ExpressionNodeProtocol?
+    private func value() -> (expression: ExpressionProtocol?, message: String?) {
+        var expr:ExpressionProtocol?
         let seq = lookahead.sequence
         
         switch lookahead.token {
             case Token.number:
-                expr = ConstantExpressionNode(value: seq)
+                expr = ConstantExpression(value: seq)
                 nextToken();
             case Token.variable:
-                expr = VariableExpressionNode(name: seq)
+                expr = VariableExpression(name: seq)
                 nextToken();
             default:
                 let mes: String = "Unexpected symbol found"
@@ -247,10 +251,10 @@ class Parser {
         return (expr!, nil)
     }
     
-    func setVariable(expression: ExpressionNodeProtocol) {
+    private func setVariable(expression: ExpressionProtocol) {
         let π = M_PI
         let e = 2.71828
-        expression.accept(SetVariable(name: "PI", value: π))
-        expression.accept(SetVariable(name: "E", value: e))
+        expression.accept(Variable(name: "PI", value: π))
+        expression.accept(Variable(name: "E", value: e))
     }
 }

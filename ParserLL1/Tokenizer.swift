@@ -8,8 +8,10 @@
 
 import Foundation
 
+// This class is implementing tokenize opportunity of expression. 
+// Get symbol by symbol and save it separately.
 class Tokenizer {
-    class TokenInfo {
+    private class TokenInfo {
         var regex: NSRegularExpression
         var token: Int
         init(regex: NSRegularExpression, token: Int){
@@ -25,11 +27,12 @@ class Tokenizer {
     private var tokenInfos: Array<TokenInfo>
     private var tokens: Array<Token>
     
-    init(){
+    private init(){
         tokenInfos = Array<TokenInfo>()
         tokens = Array<Token>()
     }
     
+    // Implement singleton pattern
     class func getExpressionTokenizer() -> Tokenizer{
         if (ExpressionTokenizer.expressionTokenizer == nil) {
             ExpressionTokenizer.expressionTokenizer = createExpressionTokenizer()
@@ -37,6 +40,7 @@ class Tokenizer {
         return ExpressionTokenizer.expressionTokenizer!
     }
     
+    // Create matching expression for regex.
     private class func createExpressionTokenizer() -> Tokenizer {
         var tokenizer:Tokenizer = Tokenizer()
 
@@ -44,7 +48,7 @@ class Tokenizer {
         tokenizer.add("[*/]", token: Token.multdiv)
         tokenizer.add("\\^", token: Token.raised)
         
-        var funcs:String = FunctionExpressionNode.getAllFunctions()
+        var funcs:String = FunctionExpression.getAllFunctions()
         tokenizer.add("(" + funcs + ")(?!\\w)", token: Token.function)
         
         tokenizer.add("\\(", token: Token.openBracket)
@@ -55,6 +59,7 @@ class Tokenizer {
         return tokenizer
     }
     
+    // Add expression for matching
     private func add(regex: String, token: Int) {
         let options = NSRegularExpressionOptions.CaseInsensitive |
             NSRegularExpressionOptions.DotMatchesLineSeparators
@@ -65,7 +70,8 @@ class Tokenizer {
         )
     }
     
-    
+    // Tokenize expression on tokens using regular expression. 
+    // It is adding all of tokens in array.
     func tokenize(str: String){
         var s = String(str)
         s.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)
@@ -86,11 +92,6 @@ class Tokenizer {
                     
                     break
                 }
-                
-                if !match {
-                    ///!!!! ERROR !!!!!
-                }
-                
                 
             }
             s = s.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil)

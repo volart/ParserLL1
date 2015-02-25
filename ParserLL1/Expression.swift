@@ -1,5 +1,5 @@
 //
-//  ExpressionNode.swift
+//  Expression.swift
 //  ParserLL1
 //
 //  Created by Artoym Volobuev on 20.02.15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ExpressionNode: Int {
+enum Expression: Int {
     case error = 0
     case variable = 1
     case constant = 2

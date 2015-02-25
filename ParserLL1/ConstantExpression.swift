@@ -1,5 +1,5 @@
 //
-//  ConstantExpressionNode.swift
+//  ConstantExpression.swift
 //  ParserLL1
 //
 //  Created by Artoym Volobuev on 20.02.15.
@@ -8,26 +8,26 @@
 
 import Foundation
 
-class ConstantExpressionNode: ExpressionNodeProtocol {
+class ConstantExpression: ExpressionProtocol {
     private var value:Double
  
-    init(value:Double){
+    init(value:Double) {
         self.value = value
     }
     
-    init(value:String){
+    init(value:String) {
         self.value = (value as NSString).doubleValue
     }
     
-    func getType() -> Int{
-        return ExpressionNode.constant.rawValue
+    func getType() -> Int {
+        return Expression.constant.rawValue
     }
     
-    func getValue() -> Double{
+    func getValue() -> Double? {
         return value
     }
     
-    func accept(visitor:ExpressionNodeVisitor){
+    func accept(visitor:ExpressionVisitor) {
         visitor.visit(self)
     }
 }

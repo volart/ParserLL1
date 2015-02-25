@@ -1,5 +1,5 @@
 //
-//  VariableExpressionNode.swift
+//  VariableExpression.swift
 //  ParserLL1
 //
 //  Created by Artoym Volobuev on 20.02.15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VariableExpressionNode: ExpressionNodeProtocol {
+class VariableExpression: ExpressionProtocol {
     private var name:String
     private var value:Double?
 
@@ -18,7 +18,7 @@ class VariableExpressionNode: ExpressionNodeProtocol {
     }
     
     func getType() -> Int {
-        return ExpressionNode.variable.rawValue
+        return Expression.variable.rawValue
     }
     
     func getName() -> String {
@@ -30,11 +30,11 @@ class VariableExpressionNode: ExpressionNodeProtocol {
 
     }
     
-    func getValue() -> Double {
-        return value!  
+    func getValue() -> Double? {
+        return value?
     }
     
-    func accept(visitor:ExpressionNodeVisitor){
+    func accept(visitor:ExpressionVisitor){
         visitor.visit(self)
     }
 }

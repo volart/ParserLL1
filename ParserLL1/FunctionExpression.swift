@@ -1,5 +1,5 @@
 //
-//  FunctionExpressionNode.swift
+//  FunctionExpression.swift
 //  ParserLL1
 //
 //  Created by Artoym Volobuev on 20.02.15.
@@ -7,22 +7,22 @@
 //
 
 import Foundation
-class FunctionExpressionNode: ExpressionNodeProtocol {
+class FunctionExpression: ExpressionProtocol {
     
     var function:Int
-    var argument:ExpressionNodeProtocol
+    var argument:ExpressionProtocol
     
-    init(function:Int, argument:ExpressionNodeProtocol){
+    init(function:Int, argument:ExpressionProtocol){
         self.function = function
         self.argument = argument
     }
     
     func getType() -> Int {
-        return ExpressionNode.function.rawValue
+        return Expression.function.rawValue
     }
     
-    func getValue() -> Double {
-        let arg:Double = argument.getValue()
+    func getValue() -> Double? {
+        let arg:Double = argument.getValue()!
         switch function {
             case FunctionNode.sin.rawValue : return sin(arg)
             case FunctionNode.cos.rawValue : return cos(arg)
@@ -68,7 +68,7 @@ class FunctionExpressionNode: ExpressionNodeProtocol {
         return "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
     }
     
-    func accept(visitor:ExpressionNodeVisitor){
+    func accept(visitor:ExpressionVisitor){
         visitor.visit(self)
         argument.accept(visitor)
         

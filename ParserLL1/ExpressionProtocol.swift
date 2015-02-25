@@ -1,5 +1,5 @@
 //
-//  ExpressionNodeProtocol.swift
+//  ExpressionProtocol.swift
 //  ParserLL1
 //
 //  Created by Artoym Volobuev on 20.02.15.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol ExpressionNodeProtocol {
+protocol ExpressionProtocol {
     func getType() -> Int
-    func getValue() -> Double
-    func accept(visitor:ExpressionNodeVisitor)
+    func getValue() -> Double?
+    func accept(visitor:ExpressionVisitor)
 }
