@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 class FunctionExpression: ExpressionProtocol {
     
     var function:Int

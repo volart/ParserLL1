@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 enum FunctionNode: Int {
     case sin = 1
     case cos = 2

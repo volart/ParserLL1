@@ -8,12 +8,12 @@
 
 import Foundation
 
-var par:Parser = Parser()
-let expr = par.parseMain(" 5+5*3 + 1")
-if expr.result != nil {
-    println(expr.result!)
-} else {
-    println("ERROR: " + expr.message!)
-}
+//var par:Parser = Parser()
+//let expr = par.parseMain(" 5+5*3 + 1")
+//if expr.result != nil {
+ //   println(expr.result!)
+//} else {
+ //   println("ERROR: " + expr.message!)
+//}
 
 
